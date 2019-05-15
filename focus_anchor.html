@@ -36,9 +36,11 @@
             let tooltipcontent = document.createElement("div");
             tooltipcontent.innerHTML = "Test";
 
+            x = window.pageXOffset + oRect.x;
+            y = window.pageYOffset + oRect.y;
             $(tooltipcontent).css({
-                "left": oRect.x + "px",
-                "top": oRect.y + "px",
+                "left": x + "px",
+                "top": y + "px",
                 "color": "red",
                 position: "absolute",
                 display: "inline-block"
