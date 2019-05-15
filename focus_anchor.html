@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery-3.3.1.js"></script>
+    <script>
+        $(function(){
+            $(document).bind('mouseup', function(e){
+                let selection;
+
+                if (window.getSelection) {
+                    selection = window.getSelection();
+                    if (selection.anchorOffset === selection.focusOffset) {
+                        return;
+                    }
+                } else {
+                    return;
+                }
+                // console.log(window.getSelection());
+
+                let oRange = selection.getRangeAt(0); //get the text range
+                let oRect = oRange.getBoundingClientRect();
+
+                // selection.toString() !== '' && alert('"' + selection.toString() + '" was selected at ' + e.pageX + '/' + e.pageY);
+
+                console.log(oRect);
+                createPopup(oRect);
+
+            });
+        });
+
+        function createPopup(oRect) {
+            // 在Body底部, 追加内容tooltipcontent;
+            // 内容tooltipcontent来自tooltip的属性data-ref的值
+            let tooltipcontent = document.createElement("div");
+            tooltipcontent.innerHTML = "Test";
+
+            $(tooltipcontent).css({
+                "left": oRect.x + "px",
+                "top": oRect.y + "px",
+                "color": "red",
+                position: "absolute",
+                display: "inline-block"
+            });
+            $(tooltipcontent).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
+
+        }
+    </script>
+</head>
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam aliquid distinctio doloremque dolorum eaque harum nihil, nulla optio porro, provident suscipit totam! Dignissimos doloribus id inventore ipsum maiores perspiciatis!</p>
+</body>
+</html>
