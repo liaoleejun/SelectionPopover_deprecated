@@ -3,9 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+        .circle-purple {
+            background: purple;
+        }
+
+        .circle-red {
+            background: red;
+        }
+
+        .circle-green {
+            background: green;
+        }
+
+        .circle-more {
+            background: wheat;
+            /*text-align: center;*/
+        }
+    </style>
     <script src="./jquery-3.3.1.js"></script>
     <script>
+
         $(function(){
+            $(document).mousedown(function (e) {
+
+                // if (window.getSelection) {
+                //     if (window.getSelection().empty) {  // Chrome
+                //         window.getSelection().empty();
+                //     } else if (window.getSelection().removeAllRanges) {  // Firefox
+                //         window.getSelection().removeAllRanges();
+                //     }
+                // } else if (document.selection) {  // IE?
+                //     document.selection.empty();
+                // }
+
+                let po = $("#popover-simple-highlight")[0];
+                if (po !== undefined) {
+                    po.parentNode.removeChild(po);
+                }
+            });
+
             // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
             $(document).bind('mouseup', function(e){
                 let selection = window.getSelection();
@@ -21,12 +68,15 @@
                 range.setEnd(node, endOffset);
                 let rects = range.getClientRects();
 
-                // 显示弹框：在Body底部, 追加元素popover
+                // 创建并显示弹框：在Body底部, 追加元素popover
                 let popover = document.createElement("div");
-                popover.innerHTML = "Test";
-                let x = rects[0].x + pageXOffset - 15; // 15px是任选的，只要不遮挡即可
+                $(popover).attr("id", "popover-simple-highlight");
+                $(popover).attr("class", "popover-content");
+                $(popover).css("border", "solid 1px gray");
+                $(popover).css("background", "wheat");
+                popover.innerHTML = "<div class='circle-purple circle popover-content'></div><div class='circle-red circle popover-content'></div><div class='circle-green circle popover-content'></div>";
+                let x = rects[0].x + pageXOffset + 15; // 15px是任选的，只要不遮挡即可
                 let y = rects[0].y + pageYOffset + 15;
-                console.log(x);
                 $(popover).css({
                     "left": x + "px",
                     "top": y + "px",
