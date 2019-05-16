@@ -35,37 +35,34 @@
     <script>
 
         $(function(){
-            $(document).mousedown(function (e) {
-
-                if (window.getSelection) {
-                    if (window.getSelection().empty) {  // Chrome
-                        window.getSelection().empty();
-                    } else if (window.getSelection().removeAllRanges) {  // Firefox
-                        window.getSelection().removeAllRanges();
-                    }
-                } else if (document.selection) {  // IE?
-                    document.selection.empty();
-                }
-
+            // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
+            $(document).bind('mouseup', function(e){
+                // 先破
                 let po = $("#popover-simple-highlight")[0];
                 if (po !== undefined) {
                     po.parentNode.removeChild(po);
                 }
-            });
-
-            // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
-            $(document).bind('mouseup', function(e){
+                // 再立
                 let selection = window.getSelection();
                 if (selection.anchorOffset === selection.focusOffset) {
                     return;
                 }
                 // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
+
+                let sel = getSelection();
+                let position = sel.anchorNode.compareDocumentPosition(sel.focusNode);
+                let backward = false;
+                // position == 0 if nodes are the same
+                if (!position && sel.anchorOffset > sel.focusOffset ||
+                    position === Node.DOCUMENT_POSITION_PRECEDING) {
+                    backward = true;
+                }
+
                 let range = document.createRange();
-                let node = window.getSelection().anchorNode; // let node = window.getSelection().anchorNode.parentNode;
-                let endOffset = selection.focusOffset;
-                let startOffset = endOffset-1;
-                range.setStart(node, startOffset);
-                range.setEnd(node, endOffset);
+                let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
+                // let endOffset = selection.focusOffset;
+                range.setStart(node, selection.focusOffset);
+                range.setEnd(node, selection.focusOffset + 1);
                 let rects = range.getClientRects();
 
                 // 创建并显示弹框：在Body底部, 追加元素popover
@@ -75,8 +72,8 @@
                 $(popover).css("border", "solid 1px gray");
                 $(popover).css("background", "wheat");
                 popover.innerHTML = "<div class='circle-purple circle popover-content'></div><div class='circle-red circle popover-content'></div><div class='circle-green circle popover-content'></div>";
-                let x = rects[0].x + pageXOffset + 15; // 15px是任选的，只要不遮挡即可
-                let y = rects[0].y + pageYOffset + 15;
+                let x = rects[0].x + pageXOffset + 10; // 15px是任选的，只要不遮挡即可
+                let y = rects[0].y + pageYOffset + 10;
                 $(popover).css({
                     "left": x + "px",
                     "top": y + "px",

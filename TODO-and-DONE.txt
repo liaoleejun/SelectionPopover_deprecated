@@ -22,4 +22,5 @@ DONE
 
     国际化，翻译为中文
     调整了Style和Bookmarks的位置
+    当anchor和focus不是同一个element，即括element了的定位bug
 
