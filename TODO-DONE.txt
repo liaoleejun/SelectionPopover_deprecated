@@ -6,6 +6,11 @@ TODO
         - 显示两排图标，第一排是三个颜色+一个更多颜色，第二排是添加批注and/or评论（annotation, comment）
            * 点击后联动到相应的高亮动作
 
+    用户选择文本的方向
+        - https://stackoverflow.com/questions/9180405/detect-direction-of-user-selection-with-javascript
+
+    insert a temporary marker element
+
     当bookmarks很多时，加载很慢
 
 DONE
