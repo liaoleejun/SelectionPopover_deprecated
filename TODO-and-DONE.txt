@@ -1,6 +1,7 @@
 Next TODO
 
     当在角落时，popover调整位置
+    我还是觉得点击popover的位置时，popover不消失，文本选中状态的背景色不消失，这种是比较好的，可是我现在脑子有点懵，不想去改
 
 TODO list
 
@@ -10,11 +11,6 @@ TODO list
         - 显示两排图标，第一排是三个颜色+一个更多颜色，第二排是添加批注and/or评论（annotation, comment）
            * 点击后联动到相应的高亮动作
 
-    用户选择文本的方向
-        - https://stackoverflow.com/questions/9180405/detect-direction-of-user-selection-with-javascript
-
-    insert a temporary marker element
-
     当bookmarks很多时，加载很慢
 
 DONE
@@ -23,5 +19,7 @@ DONE
     调整了Style和Bookmarks的位置
     当anchor和focus不是同一个element，即括element了的定位bug
     判定鼠标选中方向
-    消失
-
+    popover如何消失
+    用户选择文本的方向
+            - https://stackoverflow.com/questions/9180405/detect-direction-of-user-selection-with-javascript
+    insert a temporary marker element (不需要了，我用了range，就是rect某个字符)
