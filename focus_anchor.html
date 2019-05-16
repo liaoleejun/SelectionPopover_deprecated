@@ -89,11 +89,11 @@
                 let x;
                 let y;
                 if (backward) {
-                    x = rects[0].x + pageXOffset; // 15px是任选的，只要不遮挡即可
-                    y = rects[0].y + pageYOffset - 40;
+                    x = rects[0].x + pageXOffset;
+                    y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
                 } else {
-                    x = rects[0].x + pageXOffset; // 15px是任选的，只要不遮挡即可
-                    y = rects[0].y + pageYOffset + 20;
+                    x = rects[0].x + pageXOffset;
+                    y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
                 }
 
                 $(popover).css({

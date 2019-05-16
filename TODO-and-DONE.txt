@@ -1,7 +1,7 @@
 Next TODO
 
     当在角落时，popover调整位置
-    我还是觉得点击popover的位置时，popover不消失，文本选中状态的背景色不消失，这种是比较好的，可是我现在脑子有点懵，不想去改
+    我还是觉得点击popover的位置时，popover不消失，文本选中状态的背景色不消失，这种是比较好的，可是我现在脑子有点懵，不想去改（更新：不过，我再试了下，鼠标点击后，popover消失也是很清爽的操作模式）
 
 TODO list
 
@@ -11,7 +11,11 @@ TODO list
         - 显示两排图标，第一排是三个颜色+一个更多颜色，第二排是添加批注and/or评论（annotation, comment）
            * 点击后联动到相应的高亮动作
 
-    当bookmarks很多时，加载很慢
+    super simple highlight
+        没有点击现有的高亮，然后可以修改的功能。
+        没有添加批注的功能
+
+    当bookmarks很多时，加载很慢。分日期加载
 
 DONE
 
