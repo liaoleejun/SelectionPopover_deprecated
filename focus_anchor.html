@@ -91,35 +91,25 @@
                 let y;
                 if (backward) {
                     if (selection.focusOffset === node.length) {
-                        // console.log(node.nodeType); // 返回值为3，说明nodeType是The actual Text inside an Element or Attr.
-                        // console.log(node.parentNode.nodeType);
-                        // console.log(node.nextSibling);
-                        // console.log(node.parentNode);
-                        // range.setStart(node.parentNode.nextSibling, 1);
-                        // range.setEnd(node.parentNode.nextSibling, 2);
-                        // rects = range.getClientRects();
-                        // console.log(rects);
-
-                        range.setStart(window.getSelection().focusNode.parentNode.nextElementSibling.childNodes[0], 0);
-                        range.setEnd(window.getSelection().focusNode.parentNode.nextElementSibling.childNodes[0], 0);
+                        let boundaryNode = window.getSelection().focusNode.parentNode.nextElementSibling.childNodes[0];
+                        range.setStart(boundaryNode, 0);
+                        range.setEnd(boundaryNode, 0);
                         rects = range.getClientRects();
                     }
                     x = rects[0].x + pageXOffset;
                     y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
                 } else {
                     if (selection.focusOffset === 0) {
-                        console.log(node.nodeType);
-                        console.log(node.childNodes[0]);
-                        range.setStart(node.childNodes[0], 0);
-                        range.setEnd(node.childNodes[0], 0);
+                        let boundaryNode = window.getSelection().focusNode.previousElementSibling.lastChild;
+                        range.setStart(boundaryNode, boundaryNode.length);
+                        range.setEnd(boundaryNode, boundaryNode.length);
                         rects = range.getClientRects();
                         x = rects[0].x + pageXOffset;
-                        y = rects[0].y + pageYOffset; // 20px也是任选的，只要不遮挡即可
+                        y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
                     } else {
                         x = rects[0].x + pageXOffset;
                         y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
                     }
-
                 }
 
                 $(popover).css({
