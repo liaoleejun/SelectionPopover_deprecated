@@ -37,15 +37,15 @@
         $(function(){
             $(document).mousedown(function (e) {
 
-                // if (window.getSelection) {
-                //     if (window.getSelection().empty) {  // Chrome
-                //         window.getSelection().empty();
-                //     } else if (window.getSelection().removeAllRanges) {  // Firefox
-                //         window.getSelection().removeAllRanges();
-                //     }
-                // } else if (document.selection) {  // IE?
-                //     document.selection.empty();
-                // }
+                if (window.getSelection) {
+                    if (window.getSelection().empty) {  // Chrome
+                        window.getSelection().empty();
+                    } else if (window.getSelection().removeAllRanges) {  // Firefox
+                        window.getSelection().removeAllRanges();
+                    }
+                } else if (document.selection) {  // IE?
+                    document.selection.empty();
+                }
 
                 let po = $("#popover-simple-highlight")[0];
                 if (po !== undefined) {
