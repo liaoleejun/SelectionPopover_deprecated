@@ -6,52 +6,42 @@
     <script src="./jquery-3.3.1.js"></script>
     <script>
         $(function(){
+            // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
             $(document).bind('mouseup', function(e){
-                let selection;
-
-                if (window.getSelection) {
-                    selection = window.getSelection();
-                    if (selection.anchorOffset === selection.focusOffset) {
-                        return;
-                    }
-                } else {
+                let selection = window.getSelection();
+                if (selection.anchorOffset === selection.focusOffset) {
                     return;
                 }
-                // console.log(window.getSelection());
-                //
-                // let oRange = selection.getRangeAt(0); //get the text range
-                // let oRect = oRange.getBoundingClientRect();
-                //
-                // // selection.toString() !== '' && alert('"' + selection.toString() + '" was selected at ' + e.pageX + '/' + e.pageY);
-                //
-                // console.log(oRect);
-                createPopup(e);
+                // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
+                let range = document.createRange();
+                let node = window.getSelection().anchorNode; // let node = window.getSelection().anchorNode.parentNode;
+                let endOffset = selection.focusOffset;
+                let startOffset = endOffset-1;
+                range.setStart(node, startOffset);
+                range.setEnd(node, endOffset);
+                let rects = range.getClientRects();
 
+                // 显示弹框：在Body底部, 追加元素popover
+                let popover = document.createElement("div");
+                popover.innerHTML = "Test";
+                let x = rects[0].x + pageXOffset - 15; // 15px是任选的，只要不遮挡即可
+                let y = rects[0].y + pageYOffset + 15;
+                console.log(x);
+                $(popover).css({
+                    "left": x + "px",
+                    "top": y + "px",
+                    "color": "red",
+                    position: "absolute",
+                    display: "inline-block"
+                });
+                $(popover).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
             });
         });
-
-        function createPopup(e) {
-            // 在Body底部, 追加内容tooltipcontent;
-            // 内容tooltipcontent来自tooltip的属性data-ref的值
-            let tooltipcontent = document.createElement("div");
-            tooltipcontent.innerHTML = "Test";
-
-            let x = e.pageX;
-            let y = e.pageY + 12;
-            $(tooltipcontent).css({
-                "left": x + "px",
-                "top": y + "px",
-                "color": "red",
-                position: "absolute",
-                display: "inline-block"
-            });
-            $(tooltipcontent).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
-
-        }
     </script>
 </head>
 <body>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio facere iusto laudantium nemo reiciendis ut. Aliquam cumque odit pariatur quis tenetur ut vel vero. Asperiores dolores, fuga praesentium quas quasi sapiente voluptatem. Ab ad aliquam aperiam aut deserunt est eum exercitationem facere fugiat fugit itaque necessitatibus nobis odit, ratione saepe similique tempore ullam ut voluptate voluptatem! In itaque nemo nihil numquam obcaecati quas similique. Aliquid asperiores assumenda debitis delectus deserunt doloribus eius eligendi enim ex explicabo fugiat ipsum laborum laudantium molestiae nam neque nulla possimus quaerat quam quasi quis quisquam quo quod recusandae, unde vel voluptas. Aspernatur, blanditiis, sequi. A ex facere neque officiis similique, voluptatibus voluptatum. Aliquid, animi at culpa cumque dolorem eveniet illum laudantium nihil optio perspiciatis, porro repellendus sint veniam, vero voluptatem. Accusamus amet blanditiis, doloremque, doloribus dolorum ducimus error expedita hic in ipsum iure laudantium modi molestiae molestias, non quam sequi temporibus vitae voluptates voluptatibus? A assumenda deserunt iure minus? Architecto aspernatur, cum dignissimos ducimus eos esse facere iusto laborum obcaecati ratione! Delectus dignissimos id perspiciatis quaerat quasi reprehenderit sunt. Animi atque eveniet magnam magni, nesciunt quasi qui sed vero voluptatem voluptatibus? Adipisci aliquid animi at consectetur, consequuntur corporis deleniti eveniet illum iusto labore laudantium maiores natus nemo odit perferendis possimus quam sint sunt tenetur voluptatibus. Ad architecto, autem consequatur distinctio eaque error ex incidunt ipsa ipsum, necessitatibus numquam perferendis repellendus repudiandae ut velit. Consequatur doloribus in modi, nobis officiis porro quis suscipit veritatis! A adipisci aliquam assumenda at autem deleniti dicta dolorem doloremque, dolorum enim eos explicabo facilis fugiat ipsam labore magni modi mollitia nisi nobis nostrum praesentium quas quisquam quod ratione recusandae sequi similique soluta temporibus totam ullam vel velit veritatis vero! Ad animi beatae eligendi est facilis fuga illo molestiae nisi omnis placeat possimus quidem, quos repellendus reprehenderit soluta. Consequatur ea, natus.</p>
+<p style="margin-bottom: 100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio facere iusto laudantium nemo reiciendis ut. Aliquam cumque odit pariatur quis tenetur ut vel vero. Asperiores dolores, fuga praesentium quas quasi sapiente voluptatem. Ab ad aliquam aperiam aut deserunt est eum exercitationem facere fugiat fugit itaque necessitatibus nobis odit, ratione saepe similique tempore ullam ut voluptate voluptatem! In itaque nemo nihil numquam obcaecati quas similique. Aliquid asperiores assumenda debitis delectus deserunt doloribus eius eligendi enim ex explicabo fugiat ipsum laborum laudantium molestiae nam neque nulla possimus quaerat quam quasi quis quisquam quo quod recusandae, unde vel voluptas. Aspernatur, blanditiis, sequi. A ex facere neque officiis similique, voluptatibus voluptatum. Aliquid, animi at culpa cumque dolorem eveniet illum laudantium nihil optio perspiciatis, porro repellendus sint veniam, vero voluptatem. Accusamus amet blanditiis, doloremque, doloribus dolorum ducimus error expedita hic in ipsum iure laudantium modi molestiae molestias, non quam sequi temporibus vitae voluptates voluptatibus? A assumenda deserunt iure minus? Architecto aspernatur, cum dignissimos ducimus eos esse facere iusto laborum obcaecati ratione! Delectus dignissimos id perspiciatis quaerat quasi reprehenderit sunt. Animi atque eveniet magnam magni, nesciunt quasi qui sed vero voluptatem voluptatibus? Adipisci aliquid animi at consectetur, consequuntur corporis deleniti eveniet illum iusto labore laudantium maiores natus nemo odit perferendis possimus quam sint sunt tenetur voluptatibus. Ad architecto, autem consequatur distinctio eaque error ex incidunt ipsa ipsum, necessitatibus numquam perferendis repellendus repudiandae ut velit. Consequatur doloribus in modi, nobis officiis porro quis suscipit veritatis! A adipisci aliquam assumenda at autem deleniti dicta dolorem doloremque, dolorum enim eos explicabo facilis fugiat ipsam labore magni modi mollitia nisi nobis nostrum praesentium quas quisquam quod ratione recusandae sequi similique soluta temporibus totam ullam vel velit veritatis vero! Ad animi beatae eligendi est facilis fuga illo molestiae nisi omnis placeat possimus quidem, quos repellendus reprehenderit soluta. Consequatur ea, natus.</p>
+
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio facere iusto laudantium nemo reiciendis ut. Aliquam cumque odit pariatur quis tenetur ut vel vero. Asperiores dolores, fuga praesentium quas quasi sapiente voluptatem. Ab ad aliquam aperiam aut deserunt est eum exercitationem facere fugiat fugit itaque necessitatibus nobis odit, ratione saepe similique tempore ullam ut voluptate voluptatem! In itaque nemo nihil numquam obcaecati quas similique. Aliquid asperiores assumenda debitis delectus deserunt doloribus eius eligendi enim ex explicabo fugiat ipsum laborum laudantium molestiae nam neque nulla possimus quaerat quam quasi quis quisquam quo quod recusandae, unde vel voluptas. Aspernatur, blanditiis, sequi. A ex facere neque officiis similique, voluptatibus voluptatum. Aliquid, animi at culpa cumque dolorem eveniet illum laudantium nihil optio perspiciatis, porro repellendus sint veniam, vero voluptatem. Accusamus amet blanditiis, doloremque, doloribus dolorum ducimus error expedita hic in ipsum iure laudantium modi molestiae molestias, non quam sequi temporibus vitae voluptates voluptatibus? A assumenda deserunt iure minus? Architecto aspernatur, cum dignissimos ducimus eos esse facere iusto laborum obcaecati ratione! Delectus dignissimos id perspiciatis quaerat quasi reprehenderit sunt. Animi atque eveniet magnam magni, nesciunt quasi qui sed vero voluptatem voluptatibus? Adipisci aliquid animi at consectetur, consequuntur corporis deleniti eveniet illum iusto labore laudantium maiores natus nemo odit perferendis possimus quam sint sunt tenetur voluptatibus. Ad architecto, autem consequatur distinctio eaque error ex incidunt ipsa ipsum, necessitatibus numquam perferendis repellendus repudiandae ut velit. Consequatur doloribus in modi, nobis officiis porro quis suscipit veritatis! A adipisci aliquam assumenda at autem deleniti dicta dolorem doloremque, dolorum enim eos explicabo facilis fugiat ipsam labore magni modi mollitia nisi nobis nostrum praesentium quas quisquam quod ratione recusandae sequi similique soluta temporibus totam ullam vel velit veritatis vero! Ad animi beatae eligendi est facilis fuga illo molestiae nisi omnis placeat possimus quidem, quos repellendus reprehenderit soluta. Consequatur ea, natus.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio facere iusto laudantium nemo reiciendis ut. Aliquam cumque odit pariatur quis tenetur ut vel vero. Asperiores dolores, fuga praesentium quas quasi sapiente voluptatem. Ab ad aliquam aperiam aut deserunt est eum exercitationem facere fugiat fugit itaque necessitatibus nobis odit, ratione saepe similique tempore ullam ut voluptate voluptatem! In itaque nemo nihil numquam obcaecati quas similique. Aliquid asperiores assumenda debitis delectus deserunt doloribus eius eligendi enim ex explicabo fugiat ipsum laborum laudantium molestiae nam neque nulla possimus quaerat quam quasi quis quisquam quo quod recusandae, unde vel voluptas. Aspernatur, blanditiis, sequi. A ex facere neque officiis similique, voluptatibus voluptatum. Aliquid, animi at culpa cumque dolorem eveniet illum laudantium nihil optio perspiciatis, porro repellendus sint veniam, vero voluptatem. Accusamus amet blanditiis, doloremque, doloribus dolorum ducimus error expedita hic in ipsum iure laudantium modi molestiae molestias, non quam sequi temporibus vitae voluptates voluptatibus? A assumenda deserunt iure minus? Architecto aspernatur, cum dignissimos ducimus eos esse facere iusto laborum obcaecati ratione! Delectus dignissimos id perspiciatis quaerat quasi reprehenderit sunt. Animi atque eveniet magnam magni, nesciunt quasi qui sed vero voluptatem voluptatibus? Adipisci aliquid animi at consectetur, consequuntur corporis deleniti eveniet illum iusto labore laudantium maiores natus nemo odit perferendis possimus quam sint sunt tenetur voluptatibus. Ad architecto, autem consequatur distinctio eaque error ex incidunt ipsa ipsum, necessitatibus numquam perferendis repellendus repudiandae ut velit. Consequatur doloribus in modi, nobis officiis porro quis suscipit veritatis! A adipisci aliquam assumenda at autem deleniti dicta dolorem doloremque, dolorum enim eos explicabo facilis fugiat ipsam labore magni modi mollitia nisi nobis nostrum praesentium quas quisquam quod ratione recusandae sequi similique soluta temporibus totam ullam vel velit veritatis vero! Ad animi beatae eligendi est facilis fuga illo molestiae nisi omnis placeat possimus quidem, quos repellendus reprehenderit soluta. Consequatur ea, natus.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio facere iusto laudantium nemo reiciendis ut. Aliquam cumque odit pariatur quis tenetur ut vel vero. Asperiores dolores, fuga praesentium quas quasi sapiente voluptatem. Ab ad aliquam aperiam aut deserunt est eum exercitationem facere fugiat fugit itaque necessitatibus nobis odit, ratione saepe similique tempore ullam ut voluptate voluptatem! In itaque nemo nihil numquam obcaecati quas similique. Aliquid asperiores assumenda debitis delectus deserunt doloribus eius eligendi enim ex explicabo fugiat ipsum laborum laudantium molestiae nam neque nulla possimus quaerat quam quasi quis quisquam quo quod recusandae, unde vel voluptas. Aspernatur, blanditiis, sequi. A ex facere neque officiis similique, voluptatibus voluptatum. Aliquid, animi at culpa cumque dolorem eveniet illum laudantium nihil optio perspiciatis, porro repellendus sint veniam, vero voluptatem. Accusamus amet blanditiis, doloremque, doloribus dolorum ducimus error expedita hic in ipsum iure laudantium modi molestiae molestias, non quam sequi temporibus vitae voluptates voluptatibus? A assumenda deserunt iure minus? Architecto aspernatur, cum dignissimos ducimus eos esse facere iusto laborum obcaecati ratione! Delectus dignissimos id perspiciatis quaerat quasi reprehenderit sunt. Animi atque eveniet magnam magni, nesciunt quasi qui sed vero voluptatem voluptatibus? Adipisci aliquid animi at consectetur, consequuntur corporis deleniti eveniet illum iusto labore laudantium maiores natus nemo odit perferendis possimus quam sint sunt tenetur voluptatibus. Ad architecto, autem consequatur distinctio eaque error ex incidunt ipsa ipsum, necessitatibus numquam perferendis repellendus repudiandae ut velit. Consequatur doloribus in modi, nobis officiis porro quis suscipit veritatis! A adipisci aliquam assumenda at autem deleniti dicta dolorem doloremque, dolorum enim eos explicabo facilis fugiat ipsam labore magni modi mollitia nisi nobis nostrum praesentium quas quisquam quod ratione recusandae sequi similique soluta temporibus totam ullam vel velit veritatis vero! Ad animi beatae eligendi est facilis fuga illo molestiae nisi omnis placeat possimus quidem, quos repellendus reprehenderit soluta. Consequatur ea, natus.</p>

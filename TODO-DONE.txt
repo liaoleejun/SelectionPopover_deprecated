@@ -1,4 +1,8 @@
-TODO
+Next TODO
+
+    判定鼠标选中方向
+
+TODO list
 
     popup a box, when some text is in selection
         - 目前popup覆盖在文本上，需要微调一下位子，而这个微调需要放置逻辑和simpleTooltip类似的逻辑
