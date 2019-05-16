@@ -74,8 +74,18 @@
                 let range = document.createRange();
                 let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
                 // let endOffset = selection.focusOffset;
-                range.setStart(node, selection.focusOffset - 1);
-                range.setEnd(node, selection.focusOffset);
+                let startOffset, endOffset;
+                if (selection.focusOffset === 0) {
+                    startOffset = 0;
+                    endOffset = 1;
+                } else {
+                    startOffset = selection.focusOffset - 1;
+                    endOffset = selection.focusOffset;
+                }
+                console.log(startOffset);
+                console.log(endOffset);
+                range.setStart(node, startOffset);
+                range.setEnd(node, endOffset);
                 let rects = range.getClientRects();
 
                 // 创建并显示弹框：在Body底部, 追加元素popover
