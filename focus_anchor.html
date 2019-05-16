@@ -74,8 +74,8 @@
                 let range = document.createRange();
                 let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
                 // let endOffset = selection.focusOffset;
-                range.setStart(node, selection.focusOffset);
-                range.setEnd(node, selection.focusOffset + 1);
+                range.setStart(node, selection.focusOffset - 1);
+                range.setEnd(node, selection.focusOffset);
                 let rects = range.getClientRects();
 
                 // 创建并显示弹框：在Body底部, 追加元素popover
