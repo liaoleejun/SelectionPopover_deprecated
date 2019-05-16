@@ -87,15 +87,31 @@
                 $(popover).css("border", "solid 1px gray");
                 $(popover).css("background", "wheat");
                 popover.innerHTML = "<div class='circle-purple circle popover-content'></div><div class='circle-red circle popover-content'></div><div class='circle-green circle popover-content'></div>";
-
                 let x;
                 let y;
                 if (backward) {
+                    if (selection.focusOffset === node.length) {
+                        console.log(node.nodeType);
+                        range.setStart(node, node.length);
+                        range.setEnd(node, node.length);
+                        rects = range.getClientRects();
+                    }
                     x = rects[0].x + pageXOffset;
                     y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
                 } else {
-                    x = rects[0].x + pageXOffset;
-                    y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
+                    if (selection.focusOffset === 0) {
+                        console.log(node.nodeType);
+                        console.log(node.childNodes[0]);
+                        range.setStart(node.childNodes[0], 0);
+                        range.setEnd(node.childNodes[0], 0);
+                        rects = range.getClientRects();
+                        x = rects[0].x + pageXOffset;
+                        y = rects[0].y + pageYOffset; // 20px也是任选的，只要不遮挡即可
+                    } else {
+                        x = rects[0].x + pageXOffset;
+                        y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
+                    }
+
                 }
 
                 $(popover).css({
