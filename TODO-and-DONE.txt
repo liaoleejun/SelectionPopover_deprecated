@@ -1,7 +1,6 @@
 Next TODO
 
-    判定鼠标选中方向
-    消失
+    当在角落时，popover调整位置
 
 TODO list
 
@@ -23,4 +22,6 @@ DONE
     国际化，翻译为中文
     调整了Style和Bookmarks的位置
     当anchor和focus不是同一个element，即括element了的定位bug
+    判定鼠标选中方向
+    消失
 

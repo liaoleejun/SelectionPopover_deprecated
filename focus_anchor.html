@@ -85,8 +85,17 @@
                 $(popover).css("border", "solid 1px gray");
                 $(popover).css("background", "wheat");
                 popover.innerHTML = "<div class='circle-purple circle popover-content'></div><div class='circle-red circle popover-content'></div><div class='circle-green circle popover-content'></div>";
-                let x = rects[0].x + pageXOffset + 5; // 15px是任选的，只要不遮挡即可
-                let y = rects[0].y + pageYOffset + 20;
+
+                let x;
+                let y;
+                if (backward) {
+                    x = rects[0].x + pageXOffset; // 15px是任选的，只要不遮挡即可
+                    y = rects[0].y + pageYOffset - 40;
+                } else {
+                    x = rects[0].x + pageXOffset; // 15px是任选的，只要不遮挡即可
+                    y = rects[0].y + pageYOffset + 20;
+                }
+
                 $(popover).css({
                     "left": x + "px",
                     "top": y + "px",
