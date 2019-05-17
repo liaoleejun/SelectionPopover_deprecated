@@ -8,18 +8,14 @@
 
 </head>
 <body>
-<button id="button" onclick="doSomething()">
-    Don't click me!
-</button>
-
 <button id="button2" onclick="triggerShiftSpace()">
     Shift + Space
 </button>
 
 <script>
     $("body").on("keydown", function(e){
-        if(e.shiftKey && e.which == 32) {
-            $("#button").click();
+        if(e.metaKey && e.shiftKey && e.which === 79) {
+            doSomething();
         }
     });
 
@@ -29,8 +25,9 @@
 
     function triggerShiftSpace() {
         var event = $.Event("keydown");
+        event.metaKey = true;
         event.shiftKey = true;
-        event.which = 32;
+        event.which = 79;
         $("body").trigger(event);
     }
 </script>
