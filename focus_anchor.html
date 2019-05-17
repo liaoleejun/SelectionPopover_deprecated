@@ -57,21 +57,21 @@
             $(document).bind('mouseup', function(e){
                 // console.log("鼠标松开了");
                 let selection = window.getSelection();
-                if (selection.anchorOffset === selection.focusOffset) {
-                    // console.log(selection.anchorOffset, selection.focusOffset);
-                    return;
-                }
-                // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
-
-                let sel = getSelection();
-                let position = sel.anchorNode.compareDocumentPosition(sel.focusNode);
-                let backward = false;
                 // position == 0 if nodes are the same
-                if (!position && sel.anchorOffset > sel.focusOffset ||
+                let position = selection.anchorNode.compareDocumentPosition(selection.focusNode);
+                let backward = false;
+                if (!position && selection.anchorOffset > selection.focusOffset ||
                     position === Node.DOCUMENT_POSITION_PRECEDING) {
                     backward = true;
                 }
 
+                if (selection.anchorOffset === selection.focusOffset && position === 0) {
+                    // console.log(selection.anchorNode);
+                    // console.log(selection.focusNode);
+                    console.log("anchorOffset与focusOffset ", selection.anchorOffset, selection.focusOffset);
+                    return;
+                }
+                // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
                 let range = document.createRange();
                 let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
                 let startOffset, endOffset;
