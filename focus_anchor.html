@@ -56,27 +56,27 @@
             // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
             $(document).bind('mouseup', function(e){
                 // console.log("鼠标松开了");
-                let selection = window.getSelection();
+                let sel = window.getSelection();
                 // position == 0 if nodes are the same
-                let position = selection.anchorNode.compareDocumentPosition(selection.focusNode);
+                let position = sel.anchorNode.compareDocumentPosition(sel.focusNode);
                 let backward = false;
-                if (!position && selection.anchorOffset > selection.focusOffset ||
+                if (!position && sel.anchorOffset > sel.focusOffset ||
                     position === Node.DOCUMENT_POSITION_PRECEDING) {
                     backward = true;
                 }
 
-                if (selection.anchorOffset === selection.focusOffset && position === 0) {
+                if (sel.anchorOffset === sel.focusOffset && position === 0) {
                     // console.log(selection.anchorNode);
                     // console.log(selection.focusNode);
-                    console.log("anchorOffset与focusOffset ", selection.anchorOffset, selection.focusOffset);
+                    console.log("anchorOffset与focusOffset ", sel.anchorOffset, sel.focusOffset);
                     return;
                 }
                 // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
                 let range = document.createRange();
                 let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
                 let startOffset, endOffset;
-                startOffset = selection.focusOffset;
-                endOffset = selection.focusOffset;
+                startOffset = sel.focusOffset;
+                endOffset = sel.focusOffset;
                 range.setStart(node, startOffset);
                 range.setEnd(node, endOffset);
                 let rects = range.getClientRects();
@@ -91,7 +91,7 @@
                 let x;
                 let y;
                 if (backward) {
-                    if (selection.focusOffset === node.length) {
+                    if (sel.focusOffset === node.length) {
                         let boundaryNode = window.getSelection().focusNode.parentNode.nextElementSibling.childNodes[0];
                         range.setStart(boundaryNode, 0);
                         range.setEnd(boundaryNode, 0);
@@ -107,7 +107,7 @@
                     }
 
                 } else {
-                    if (selection.focusOffset === 0) {
+                    if (sel.focusOffset === 0) {
                         let boundaryNode = window.getSelection().focusNode.previousElementSibling.lastChild;
                         range.setStart(boundaryNode, boundaryNode.length);
                         range.setEnd(boundaryNode, boundaryNode.length);
