@@ -33,10 +33,11 @@
     </style>
     <script src="./jquery-3.3.1.js"></script>
     <script>
-
+        <!-- SimpleSelectionPopover的JS脚本 -->
         $(function(){
+            /* 鼠标按下的操作 */
             $(document).mousedown(function (e) {
-
+                /* 清空文本选中状态，这么做的原因是，Mac的TracePad操作时，按下鼠标，文本选中状态不会置空，不置空导致鼠标按下下面的逻辑删除了Popover但是鼠标松开抬起时又会显示Popover，即会闪烁一下，之后选中状态才会置空，但是此时Popover还是显示的 */
                 if (window.getSelection) {
                     if (window.getSelection().empty) {  // Chrome
                         window.getSelection().empty();
@@ -47,31 +48,35 @@
                     document.selection.empty();
                 }
 
+                /* 删除当前界面的Popover，虽然每次都是仅有一个Popover存在 */
                 let po = $("#popover-simple-highlight")[0];
                 if (po !== undefined) {
                     po.parentNode.removeChild(po);
                 }
             });
 
-            // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
+            /* 监听网页文本选中事件，用监听鼠标松开事件来判定（这是目前找到的判定方法）*/
             $(document).bind('mouseup', function(e){
+
+                /* 判定鼠标光标选中的内容，是否是同一个Node，以及判定鼠标光标选中内容时的方向。（鼠标光标选中内容可能就是一个光标即为空，也可能是有内容比如文本处于选中状态）*/
                 // console.log("鼠标松开了");
                 let sel = window.getSelection();
-                // position == 0 if nodes are the same
-                let position = sel.anchorNode.compareDocumentPosition(sel.focusNode);
+                let position = sel.anchorNode.compareDocumentPosition(sel.focusNode); // position == 0 if nodes are the same
                 let backward = false;
                 if (!position && sel.anchorOffset > sel.focusOffset ||
                     position === Node.DOCUMENT_POSITION_PRECEDING) {
                     backward = true;
                 }
 
+                /* 当鼠标光标选中内容就是一个光标即为空时，就是没选中任何内容，这时不弹出Popover即不进行后续的逻辑 */
                 if (sel.anchorOffset === sel.focusOffset && position === 0) {
                     // console.log(selection.anchorNode);
                     // console.log(selection.focusNode);
-                    console.log("anchorOffset与focusOffset ", sel.anchorOffset, sel.focusOffset);
+                    // console.log("anchorOffset与focusOffset ", sel.anchorOffset, sel.focusOffset);
                     return;
                 }
-                // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
+
+                /* 用一个"range"去罩住选中的光标终点（终点是focus，起点是anchor）*/
                 let range = document.createRange();
                 let node = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
                 let startOffset, endOffset;
@@ -81,15 +86,18 @@
                 range.setEnd(node, endOffset);
                 let rects = range.getClientRects();
 
-                // 创建并显示弹框：在Body底部, 追加元素popover
+                /* 创建弹框即创建Popover */
                 let popover = document.createElement("div");
                 $(popover).attr("id", "popover-simple-highlight");
                 $(popover).attr("class", "popover-content");
                 $(popover).css("border", "solid 1px gray");
                 $(popover).css("background", "wheat");
                 popover.innerHTML = "<div class='circle-purple circle popover-content'></div><div class='circle-red circle popover-content'></div><div class='circle-green circle popover-content'></div>";
+
+                /* 确定Popover的位置坐标 x, y 的值*/
                 let x;
                 let y;
+                /* 处理两个临界值，第一个临界值是，比如当鼠标向上选择内容，但是选择的终点位置是介于一个段落和另一个段落之间的空白时*/
                 if (backward) {
                     if (sel.focusOffset === node.length) {
                         let boundaryNode = window.getSelection().focusNode.parentNode.nextElementSibling.childNodes[0];
@@ -105,7 +113,7 @@
                         y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
                         console.log(x, y);
                     }
-
+                /* 处理的第二个临界值是，比如当鼠标向下选择内容，但是选择的终点位置是介于一个段落和另一个段落之间的空白时*/
                 } else {
                     if (sel.focusOffset === 0) {
                         let boundaryNode = window.getSelection().focusNode.previousElementSibling.lastChild;
@@ -122,7 +130,6 @@
                         console.log(x, y);
                     }
                 }
-
                 $(popover).css({
                     "left": x + "px",
                     "top": y + "px",
@@ -130,7 +137,8 @@
                     position: "absolute",
                     display: "inline-block"
                 });
-                // console.log(selection.toString());
+
+                /* 创建Popover，具体操作是在Body底部, 追加元素popover*/
                 $(popover).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
             });
         });
