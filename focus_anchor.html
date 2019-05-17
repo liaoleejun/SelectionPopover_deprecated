@@ -33,7 +33,7 @@
     </style>
     <script src="./jquery-3.3.1.js"></script>
     <script>
-        <!-- SimpleSelectionPopover的JS脚本 -->
+        /* SimpleSelectionPopover的JS脚本 */
         $(function(){
             /* 鼠标按下的操作 */
             $(document).mousedown(function (e) {
@@ -141,6 +141,7 @@
 
                 /* 创建Popover，具体操作是在Body底部, 追加元素popover*/
                 $(popover).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
+                console.log(sel.toString());
             });
         });
     </script>
