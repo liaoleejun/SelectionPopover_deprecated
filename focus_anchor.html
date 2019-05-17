@@ -79,11 +79,8 @@
                 /* 用一个"range"去罩住选中的光标终点（终点是focus，起点是anchor）*/
                 let range = document.createRange();
                 let focusNode = window.getSelection().focusNode; // let node = window.getSelection().anchorNode.parentNode;
-                let startOffset, endOffset;
-                startOffset = sel.focusOffset;
-                endOffset = sel.focusOffset;
-                range.setStart(focusNode, startOffset);
-                range.setEnd(focusNode, endOffset);
+                range.setStart(focusNode, sel.focusOffset); // node和offset
+                range.setEnd(focusNode, sel.focusOffset); // node和offset
                 let rects = range.getClientRects();
 
                 /* 创建弹框即创建Popover */
