@@ -61,6 +61,10 @@
                 /* 判定鼠标光标选中的内容，是否是同一个Node，以及判定鼠标光标选中内容时的方向。（鼠标光标选中内容可能就是一个光标即为空，也可能是有内容比如文本处于选中状态）*/
                 // console.log("鼠标松开了");
                 let sel = window.getSelection();
+                console.log(sel);
+                if (sel.focusNode === null) {
+                    return;
+                }
                 let position = sel.anchorNode.compareDocumentPosition(sel.focusNode); // position == 0 if nodes are the same
                 let backward = false;
                 if (!position && sel.anchorOffset > sel.focusOffset ||
