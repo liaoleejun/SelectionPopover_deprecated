@@ -55,9 +55,10 @@
 
             // 监听网页文本选中事件：监听鼠标松开事件，如果松开鼠标并且window.getSelection的起点不等于终点
             $(document).bind('mouseup', function(e){
-
+                // console.log("鼠标松开了");
                 let selection = window.getSelection();
                 if (selection.anchorOffset === selection.focusOffset) {
+                    // console.log(selection.anchorOffset, selection.focusOffset);
                     return;
                 }
                 // 获取位置：网页选中部分的文本的终点位置（终点是focus，起点是anchor）
@@ -95,9 +96,16 @@
                         range.setStart(boundaryNode, 0);
                         range.setEnd(boundaryNode, 0);
                         rects = range.getClientRects();
+                        x = rects[0].x + pageXOffset;
+                        y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
+                        console.log("focusOffset equals node length.");
+                        console.log(x, y);
+                    } else {
+                        x = rects[0].x + pageXOffset;
+                        y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
+                        console.log(x, y);
                     }
-                    x = rects[0].x + pageXOffset;
-                    y = rects[0].y + pageYOffset - 40; // 40px是任选的，只要不遮挡即可
+
                 } else {
                     if (selection.focusOffset === 0) {
                         let boundaryNode = window.getSelection().focusNode.previousElementSibling.lastChild;
@@ -106,9 +114,12 @@
                         rects = range.getClientRects();
                         x = rects[0].x + pageXOffset;
                         y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
+                        console.log("focusOffset equals 0.");
+                        console.log(x, y);
                     } else {
                         x = rects[0].x + pageXOffset;
                         y = rects[0].y + pageYOffset + 20; // 20px也是任选的，只要不遮挡即可
+                        console.log(x, y);
                     }
                 }
 
@@ -119,6 +130,7 @@
                     position: "absolute",
                     display: "inline-block"
                 });
+                // console.log(selection.toString());
                 $(popover).hide().appendTo("body").fadeIn(100); // jQuery fade in effect
             });
         });
