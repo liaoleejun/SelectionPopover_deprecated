@@ -11,23 +11,14 @@
 <button id="button2" onclick="triggerShiftSpace()">
     Shift + Space
 </button>
-
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi consequuntur eligendi esse eveniet in ipsum iusto minus non pariatur quia quibusdam quod, reprehenderit sed temporibus velit veritatis vero vitae.</p>
 <script>
-    $("body").on("keydown", function(e){
-        if(e.metaKey && e.shiftKey && e.which === 79) {
-            doSomething();
-        }
-    });
-
-    function doSomething() {
-        alert("Button was clicked");
-    }
 
     function triggerShiftSpace() {
         var event = $.Event("keydown");
         event.metaKey = true;
-        event.shiftKey = true;
-        event.which = 79;
+        // event.shiftKey = true;
+        event.which = 65;
         $("body").trigger(event);
     }
 </script>
